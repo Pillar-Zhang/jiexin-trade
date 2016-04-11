@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.itcast.jk.mapper.SysCodeMapper">
+	<resultMap type="cn.itcast.jk.domain.SysCode" id="sysCodeRM">
+		<id property="id" column="SYS_CODE_ID"/>
+		<result property="orderNo" column="ORDER_NO"/>
+		<result property="name" column="NAME"/>
+	</resultMap>
+	
+	<!-- 查询某个分类下的内容 -->
+	<select id="find" parameterType="map" resultMap="sysCodeRM">
+		select sys_code_id,order_no,name from sys_code_b
+		where 1=1
+		<if test="parentId != null"> and parent_id=#{parentId}</if>
+	</select>
+	
+</mapper>
